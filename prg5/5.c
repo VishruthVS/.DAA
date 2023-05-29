@@ -117,9 +117,9 @@ void main()
 	for(int n=10;n<=100;n+=10)
 	{
 		a=(int *)malloc(n*sizeof(int));
-		a[0]=rand()%100;
-		for(int i=1;i<n;i++)
-			a[i]=a[i-1]+rand()%10;
+		a[n-1]=rand()%100;
+		for(int i=n-1;i>0;i--)
+			a[i-1]=a[i]+rand()%10;
 		genWorstCase(a,0,n-1);
 		recordCount(a,n,f,fc);
 	}
