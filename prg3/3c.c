@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-int c=0;
+int c;
 void ISort(int *a,int n)
 {
 	for(int i=1;i<n;i++)
