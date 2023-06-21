@@ -1,16 +1,21 @@
 #include<stdio.h>
 
-int a[10][10],visit[10],con[20],j=0,acy=1,n,c=0;
+int a[10][10],visit[10],con[20],j=0,q[10],r=-1,f=0,acy=1,n,c=0;
 
-void dfs(int s)
+void bfs(int s)
 {
-	visit[s]=1;con[j++]=s;
-	for(int i=s;i<=n;i++,c++)
+    con[j++]=s;c++;
+	for(int i=s;i<=n;i++)
 	{	
 		if(a[s][i]&&visit[i])
 			acy=0;
 		if(a[s][i]&&!visit[i])
-			dfs(i);
+			q[++r]=i;
+		if(r>=f)
+		{
+			visit[q[r]]=1;
+			bfs(q[f++]);
+		}
 	}
 }
 
@@ -21,7 +26,7 @@ void concyc()
 		if(!visit[i])
 		{
 			f=0;con[j++]=0;
-			dfs(i);
+			bfs(i);
 		}
 	if(f)
 		printf("Graph is connected\n");
@@ -55,7 +60,8 @@ void main()
 	for(i=1;i<=n;i++)
 		for(j=1;j<=n;j++)
 			scanf("%d",&a[i][j]);
-	dfs(1);
+	visit[1]=1;
+	bfs(1);
 	concyc();
 	printf("The operation count is : %d\n",c);
 }
