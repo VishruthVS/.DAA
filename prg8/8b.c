@@ -26,18 +26,20 @@ void main()
 	    v=q[++f];
 	    topo[++co]=v;
 	        for(int j=1;j<=n;j++)
-                if(a[i][j])
+                if(a[v][j])
                 {
+                    a[v][j]=0;
                     indeg[j]--;
-                    
+                    if(indeg[j]==0)
+                        q[++r]=j;
                 }
 	}
-	if(v==n+1)
+	if(co<n)
 	    printf("The topological sorting is not possible");
 	else
 	{
 	    printf("topological Sorting is : ");
-	    for(int i=0;i<n;i++)
+	    for(int i=0;i<=co;i++)
 	        printf("%d ",topo[i]);
 	}
 	printf("\n");
