@@ -4,9 +4,10 @@ int a[10][10],visit[10],con[20],j=0,q[10],r=-1,f=0,acy=1,n,c=0;
 
 void bfs(int s)
 {
-    con[j++]=s;c++;
+    con[j++]=s;
 	for(int i=s;i<=n;i++)
 	{	
+		c++;
 		if(a[s][i]&&visit[i])
 			acy=0;
 		if(a[s][i]&&!visit[i])
