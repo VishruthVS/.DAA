@@ -1,4 +1,6 @@
 // Plot
+/*program to implement the dfs algorithm and to check connectivity and acyclicity with adjacency matrix */
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -25,7 +27,7 @@ void ploter(int k)
 {
 
     FILE *f1= fopen("DFSBEST.txt", "a");
-    FILE *f2=fopen("DFWOSR.txt", "a");
+    FILE *f2=fopen("DFSWORST.txt", "a");
     int v;
     for(int i=1;i<=10;i++)
   {
@@ -80,11 +82,14 @@ if(k==1)
             start++;
         }
 
-           if(k==0)
-         fprintf(f2,"%d\t%d\n",v,count);
-         else
-          fprintf(f2,"%d\t%d\n",v,count);
-
+           if(k==0){//worst
+         fprintf(f2,"%d\t%d\n",v,dcount);
+          printf("%d\t%d\n",v,dcount);
+         
+         }else{
+          fprintf(f1,"%d\t%d\n",v,dcount);
+	printf("%d\t%d\n",v,dcount);
+	}
   }
 
   fclose(f1);
