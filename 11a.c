@@ -2,50 +2,58 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-int count;
-void merge(int *arr,int beg,int mid,int end)
-{
-   int i,j,k;
-   int n1=(mid-beg)+1;
-   int n2=end-mid;
-   int left[n1],right[n2];
-   for(i=0;i<n1;i++)
-   left[i]=arr[beg+i];
-   for(j=0;j<n2;j++)
-   right[j]=arr[mid+j+1];
-    i=0;j=0;k=beg;
-   while(i<n1&&j<n2)
-   {
-        count++;
-       if(left[i]<=right[j])
-        arr[k]=left[i++];
-       else
-        arr[k]=right[j++];
-       k++;
-   }
 
-    while(i<n1)
-    arr[k++]=left[i++];
-     while(j<n2)
-    arr[k++]=right[j++];
-
+int count,count2=0;
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+    return;
 }
 
-
-
-void mergesort(int *arr,int beg,int end)
-{
-    if(beg<end)
+void heapify(int *heap, int n, int root) {
+    int largest = root;
+    int left = 2*root+1;
+    int right = 2*root+2;
+    if(left < n )
     {
-     int mid=(beg+end)/2;
-     mergesort(arr,beg,mid);
-     mergesort(arr,mid+1,end);
-     merge(arr,beg,mid,end);
+          count++;
+    if(heap[left] > heap[largest]) {
+        largest = left;
+    }
+    }
+    if(right < n )
+    {
+          count++;
+    if(heap[right] > heap[largest]) {
+        largest = right;
+    }
+    }
+    if(largest != root) {
+        swap(&heap[root], &heap[largest]);
+        heapify(heap, n, largest);
     }
 }
 
 
+void heapSort(int *heap, int n) {
+    for(int i = (n/2)-1; i>=0; i--) {
+        heapify(heap, n, i);
+    }
+     count2=count;
+     count=0;
+    for(int i = n-1; i>=0; i--) {
+        swap(&heap[0], &heap[i]);
+        heapify(heap, i, 0);
+    }
 
+}
+
+int max(int a, int b) {
+
+    int temp =a>b ? a:b;
+    return temp;
+}
 void main()
 {
   int *arr, n;
@@ -62,7 +70,7 @@ void main()
        printf("%d ",arr[i]);
     printf("\n");
 
-      mergesort(arr,0,n-1);
+      heapSort(arr,n);
 
       printf("THE ELEMENTS OF THE ARRAY BEFORE SORTING\n"); 
     for(int i=0;i<n;i++)
